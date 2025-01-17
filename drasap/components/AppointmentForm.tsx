@@ -7,13 +7,10 @@ interface FormData {
   name: string
   age: string
   gender: string
-  occupation: string
-  medicalHistory: string
-  currentMedications: string
-  allergies: string
   symptoms: string
   symptomDuration: string
-  recentActivities: string
+  currentMedications: string
+  allergies: string
 }
 
 export default function AppointmentForm() {
@@ -23,13 +20,10 @@ export default function AppointmentForm() {
     name: '',
     age: '',
     gender: '',
-    occupation: '',
-    medicalHistory: '',
-    currentMedications: '',
-    allergies: '',
     symptoms: '',
     symptomDuration: '',
-    recentActivities: ''
+    currentMedications: '',
+    allergies: ''
   })
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -67,43 +61,48 @@ export default function AppointmentForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="space-y-4">
-        <h2 className="text-xl font-semibold">Initial Assessment</h2>
+    <form onSubmit={handleSubmit} className="space-y-6 bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-blue-100">
+      <div className="space-y-6">
+        <div className="border-b border-blue-100 pb-4">
+          <h2 className="text-2xl font-semibold text-blue-900">Initial Assessment</h2>
+          <p className="text-blue-600 mt-1">Please provide your basic information and symptoms</p>
+        </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block mb-1">Full Name</label>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="form-group">
+            <label className="block mb-2 text-sm font-medium text-blue-900">Full Name</label>
             <input
               type="text"
               name="name"
               value={formData.name}
               onChange={handleChange}
               required
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white/50"
+              placeholder="Enter your full name"
             />
           </div>
 
-          <div>
-            <label className="block mb-1">Age</label>
+          <div className="form-group">
+            <label className="block mb-2 text-sm font-medium text-blue-900">Age</label>
             <input
               type="number"
               name="age"
               value={formData.age}
               onChange={handleChange}
               required
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white/50"
+              placeholder="Your age"
             />
           </div>
 
-          <div>
-            <label className="block mb-1">Gender</label>
+          <div className="form-group md:col-span-2">
+            <label className="block mb-2 text-sm font-medium text-blue-900">Gender</label>
             <select
               name="gender"
               value={formData.gender}
               onChange={handleChange}
               required
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white/50"
             >
               <option value="">Select gender</option>
               <option value="male">Male</option>
@@ -111,99 +110,67 @@ export default function AppointmentForm() {
               <option value="other">Other</option>
             </select>
           </div>
+        </div>
 
-          <div>
-            <label className="block mb-1">Occupation</label>
-            <input
-              type="text"
-              name="occupation"
-              value={formData.occupation}
+        <div className="space-y-4">
+          <div className="form-group">
+            <label className="block mb-2 text-sm font-medium text-blue-900">What symptoms are you experiencing?</label>
+            <textarea
+              name="symptoms"
+              value={formData.symptoms}
               onChange={handleChange}
               required
-              className="w-full p-2 border rounded"
+              className="w-full p-3 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white/50"
+              rows={3}
+              placeholder="Please describe your symptoms in detail"
+            />
+          </div>
+
+          <div className="form-group">
+            <label className="block mb-2 text-sm font-medium text-blue-900">How long have you had these symptoms?</label>
+            <input
+              type="text"
+              name="symptomDuration"
+              value={formData.symptomDuration}
+              onChange={handleChange}
+              required
+              className="w-full p-3 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white/50"
+              placeholder="e.g., 2 days, 1 week"
             />
           </div>
         </div>
 
-        <div>
-          <label className="block mb-1">Current Symptoms</label>
-          <textarea
-            name="symptoms"
-            value={formData.symptoms}
-            onChange={handleChange}
-            required
-            className="w-full p-2 border rounded"
-            rows={3}
-            placeholder="Please describe your symptoms in detail"
-          />
-        </div>
+        <div className="space-y-4">
+          <div className="form-group">
+            <label className="block mb-2 text-sm font-medium text-blue-900">Current Medications</label>
+            <input
+              type="text"
+              name="currentMedications"
+              value={formData.currentMedications}
+              onChange={handleChange}
+              className="w-full p-3 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white/50"
+              placeholder="List any medications you are currently taking"
+            />
+          </div>
 
-        <div>
-          <label className="block mb-1">How long have you had these symptoms?</label>
-          <input
-            type="text"
-            name="symptomDuration"
-            value={formData.symptomDuration}
-            onChange={handleChange}
-            required
-            className="w-full p-2 border rounded"
-            placeholder="e.g., 2 days, 1 week"
-          />
-        </div>
-
-        <div>
-          <label className="block mb-1">Medical History</label>
-          <textarea
-            name="medicalHistory"
-            value={formData.medicalHistory}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            rows={3}
-            placeholder="Any previous conditions or surgeries"
-          />
-        </div>
-
-        <div>
-          <label className="block mb-1">Current Medications</label>
-          <textarea
-            name="currentMedications"
-            value={formData.currentMedications}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            rows={2}
-            placeholder="List any medications you are currently taking"
-          />
-        </div>
-
-        <div>
-          <label className="block mb-1">Allergies</label>
-          <input
-            type="text"
-            name="allergies"
-            value={formData.allergies}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            placeholder="Any known allergies"
-          />
-        </div>
-
-        <div>
-          <label className="block mb-1">Recent Activities or Incidents</label>
-          <textarea
-            name="recentActivities"
-            value={formData.recentActivities}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-            rows={2}
-            placeholder="Any recent travel, injuries, or changes in routine"
-          />
+          <div className="form-group">
+            <label className="block mb-2 text-sm font-medium text-blue-900">Allergies</label>
+            <input
+              type="text"
+              name="allergies"
+              value={formData.allergies}
+              onChange={handleChange}
+              className="w-full p-3 border border-blue-200 rounded-md focus:ring-2 focus:ring-blue-400 focus:border-blue-400 bg-white/50"
+              placeholder="Any known allergies"
+            />
+          </div>
         </div>
 
         <button
           type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded hover:bg-blue-600"
+          className="w-full bg-gradient-to-r from-blue-600 to-blue-500 text-white py-3 px-4 rounded-md hover:from-blue-700 hover:to-blue-600 transition-all duration-200 font-medium shadow-md"
         >
-          Submit Initial Assessment
+          Continue to Follow-up Questions
         </button>
       </div>
     </form>

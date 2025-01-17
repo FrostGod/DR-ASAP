@@ -2,12 +2,15 @@
 
 import { useState } from 'react'
 import AppointmentForm from '@/components/AppointmentForm'
+import Logo from '@/components/Logo'
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-4">
-      <div className="w-full max-w-2xl">
-        <h1 className="text-2xl font-bold mb-8 text-center">DR ASAP - Medical Assistant</h1>
+    <main className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-blue-50">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        <div className="mb-8">
+          <Logo />
+        </div>
         <AppointmentForm />
       </div>
     </main>
